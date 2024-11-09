@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from 'react'
-import { cn } from '@/lib/utils'
 import { LoadingButton } from './ui/LoadingButton'
 import { useParams, useRouter } from 'next/navigation'
 import { trpc } from '@/trpc/client'
@@ -23,7 +22,7 @@ function UnlockLinkForm({ deviceType, location }: {
   })
 
   const unlockMutation = trpc.links.unlockLink.useMutation({
-    onSuccess: (data) => {
+    onSuccess: () => {
       registerClicksMutation.mutate({
         customId: custom_id,
         location: location,

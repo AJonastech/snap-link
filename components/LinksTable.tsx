@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
+import {TableCell ,TableRow } from './ui/table'
 import Link from 'next/link'
 import { Button, buttonVariants } from './ui/button'
 import { Copy, Trash2 } from 'lucide-react'

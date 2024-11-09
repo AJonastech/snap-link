@@ -17,15 +17,15 @@ import {
     ArcElement,
 } from "chart.js";
 import { motion } from "framer-motion";
-import { ArrowRightIcon, BarChart3, Bell, ChevronDown, DownloadIcon, Link2, Settings,  } from "lucide-react";
+import { ArrowRightIcon, BarChart3, DownloadIcon, Link2  } from "lucide-react";
 import Image from "next/image";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TRPCClientError } from "@trpc/client";
 import { trpc } from "@/trpc/client";
 import { Table,TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import LinksTableLoader from "@/components/LinksTableLoader";
 import LinksTable from "@/components/LinksTable";
 import { SubscribeModal } from "@/components/Subscribe";
+import Link from "next/link";
 
 ChartJS.register(
     CategoryScale,
@@ -42,7 +42,7 @@ ChartJS.register(
 function DashboardView() {
 
 const links = trpc.links.fetchTopLinks.useQuery()
-const { data, isLoading, error } = trpc.user.getUserSubscription.useQuery();
+const { data,  error } = trpc.user.getUserSubscription.useQuery();
 const [open , setOpen]= useState(false)
 
 useEffect(()=>{
@@ -50,10 +50,11 @@ if(data&& !data?.isPremium){
 setOpen(true)
 }
 },[data])
+console.log(error)
 
-const onOpen = ()=>{
+// const onOpen = ()=>{
 
-}
+// }
     const [chartType, setChartType] = useState("bar");
 
     const { isLoaded, isSignedIn } = useUser();
@@ -64,8 +65,8 @@ const onOpen = ()=>{
 
 
 
-    const primaryColor = "hsl(220, 100%, 54%)"; // Theme color in HSL
-    const primaryColorAlpha = "hsla(220, 100%, 54%, 0.5)";
+    // const primaryColor = "hsl(220, 100%, 54%)"; // Theme color in HSL
+    // const primaryColorAlpha = "hsla(220, 100%, 54%, 0.5)";
 
     const lineChartData = links.data?.lineChartData || { labels: [], datasets: [] };
 const barChartData = links.data?.barChartData || { labels: [], datasets: [] };
@@ -278,6 +279,26 @@ const pieChartData = links?.data?.pieChartData || { labels: [], datasets: [] };
                
               </TableBody>
             </Table>
+                    {links.data?.links.length === 0 && (
+                        <div className="flex flex-col items-center justify-center py-12 px-4">
+                            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-full p-6 mb-6">
+                                <Link2 className="w-12 h-12 text-primary" />
+                            </div>
+                            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                                No links created yet
+                            </h3>
+                            <p className="text-gray-500 text-center mb-6 max-w-md">
+                                Create your first custom link to start tracking clicks and measuring performance
+                            </p>
+                            <Link 
+                                href="/custom-links"
+                                className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
+                            >
+                                <Link2 className="mr-2 h-4 w-4" />
+                                Create your first link
+                            </Link>
+                        </div>
+                    )}
                     </div>
                 </motion.div>
             </div>

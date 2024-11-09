@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { Box, CalendarDays, Link2, Link2Icon, Lock, Server, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,7 +54,7 @@ export default function Home() {
 
           <p className="text-gray-500">
 
-            On a single platform, you'll find all the tools you need to connect audiences worldwide, manage links and QR Codes, and create brand relationships.
+            On a single platform, you&apos;ll find all the tools you need to connect audiences worldwide, manage links and QR Codes, and create brand relationships.
 
           </p>
           <div className="flex gap-x-3">

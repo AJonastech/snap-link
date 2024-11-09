@@ -67,7 +67,7 @@ export default function SuccessPage() {
                     Payment Successful!
                 </h1>
                 <p className="text-gray-600 mb-8">
-                    Thank you for your purchase. We've sent you an email with all the details.
+                    Thank you for your purchase. We&apos;ve sent you an email with all the details.
                 </p>
 
                 <Link href="/dashboard">

@@ -169,7 +169,7 @@ return (
                     <p className="text-sm text-muted-foreground">
                         Once you delete a link, there is no going back. Please be certain.
                     </p>
-                    <Button onClick={()=>{setShowDeleteModal((prev)=>true)}} variant="destructive" className="w-full">
+                    <Button onClick={()=>{setShowDeleteModal(true)}} variant="destructive" className="w-full">
                         Delete Link
                     </Button>
                 </div>

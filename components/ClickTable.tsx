@@ -2,7 +2,6 @@ import React from 'react'
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from './ui/card'
 import { TableHead, TableRow, TableHeader, TableBody, TableCell, Table } from './ui/table'
 import { Click as TClick } from '@prisma/client'
-import { PaginationEllipsis, Pagination, PaginationContent,PaginationPrevious, PaginationItem, PaginationLink, PaginationNext } from './ui/pagination'
 import PaginationView from './PaginationView'
 function ClickTable({
     clickData,
