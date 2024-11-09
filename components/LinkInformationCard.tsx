@@ -1,25 +1,21 @@
 "use client"
 import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
-import { Input } from './ui/input'
-import { Label } from './ui/label'
 import { Button } from './ui/button'
-import { Switch } from './ui/switch'
 import { Badge } from './ui/badge'
 import { Copy, CheckIcon, Settings } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link as LinkType } from '@prisma/client'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
-import EditDialog from './EditDialog'
+
 
 
 
 
 interface LinkInformationCardProps {
     linkData: Omit<LinkType, 'password'>;
-    handleEdit: (event: React.FormEvent<HTMLFormElement>) => void;
+
 }
-function LinkInformationCard({ linkData, handleEdit }: LinkInformationCardProps) {
+function LinkInformationCard({ linkData }: LinkInformationCardProps) {
 
     const [isCopied, setIsCopied] = useState(false)
 

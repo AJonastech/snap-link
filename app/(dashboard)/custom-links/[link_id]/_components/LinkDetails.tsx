@@ -12,7 +12,6 @@ import { useParams } from 'next/navigation';
 import LinkInfoLoader from '@/components/LinkInfoLoader';
 import ClickTableSkeleton from '@/components/ClickTableSkeleton';
 import OriginalUrlSnapShot from '@/components/OriginalUrlSnapShot';
-import { Input } from '@/components/ui/input';
 import LinkSettings from '@/components/LinkSettings';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -23,25 +22,21 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const LinkDetails = () => {
     const [activeTab, setActiveTab] = useState<'overview' | 'settings'>('overview');
-    const [isEditing, setIsEditing] = useState(false);
+  
     const param = useParams();
     const customId = Array.isArray(param.link_id) ? param.link_id[0] : param.link_id;
     const [page, setPage] = useState(1)
     const limit = 5
-    const { data: linkDetails, isLoading, isError } = trpc.links.fetchLinkDetail.useQuery({
+    const { data: linkDetails, isLoading } = trpc.links.fetchLinkDetail.useQuery({
         customId
     })
-    const { data: clickDetails, isLoading: isClickLoading, isError: isClickError } = trpc.clicks.fetchLinkClicks.useQuery({
+    const { data: clickDetails, isLoading: isClickLoading } = trpc.clicks.fetchLinkClicks.useQuery({
         customId,
         page,
         limit
     })
 
-    const handleEdit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Handle link editing
-        setIsEditing(false);
-    };
+ 
 
     const handleDownloadQR = () => {
         const svg = document.getElementById('qr-code');
@@ -167,7 +162,6 @@ const LinkDetails = () => {
                         <LinkInfoLoader />
                     ) : linkDetails ? (
                         <LinkInformationCard
-                            handleEdit={handleEdit}
                             linkData={{
                                 ...linkDetails.data,
                                 createdAt: new Date(linkDetails.data.createdAt),

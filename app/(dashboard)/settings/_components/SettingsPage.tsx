@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useForm } from 'react-hook-form'
+// import { useForm } from 'react-hook-form'
 import { Separator } from '@/components/ui/separator'
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from 'next/navigation'
@@ -35,26 +35,26 @@ function SettingsPage() {
       })
     }})
 
-  const form = useForm({
-    defaultValues: {
-      name: '',
-      email: '',
-      notifications: true,
-      marketingEmails: false
-    }
-  })
+  // const form = useForm({
+  //   defaultValues: {
+  //     name: '',
+  //     email: '',
+  //     notifications: true,
+  //     marketingEmails: false
+  //   }
+  // })
 
 const createStripeSession =()=>{
     createSession()
 }
 
-  const onSubmit = async (data: any) => {
-    // TODO: Implement settings update
-    toast({
-      title: "Settings updated",
-      description: "Your settings have been updated successfully."
-    })
-  }
+  // const onSubmit = async (data: any) => {
+  //   // TODO: Implement settings update
+  //   toast({
+  //     title: "Settings updated",
+  //     description: "Your settings have been updated successfully."
+  //   })
+  // }
 
   return (
     <div className="container mx-auto py-6">

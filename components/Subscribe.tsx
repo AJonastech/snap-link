@@ -36,7 +36,7 @@ export function SubscribeModal({ isOpen, onClose }: { isOpen: boolean; onClose: 
                     </div>
                     <div className="bg-blue-50 p-4 rounded-lg">
                         <p className="text-sm text-blue-800">
-                            Join thousands of professionals who've already upgraded to enhance their link management experience.
+                            Join thousands of professionals who&apos;ve already upgraded to enhance their link management experience.
                         </p>
                     </div>
                     <Button 

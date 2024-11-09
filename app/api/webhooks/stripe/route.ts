@@ -1,15 +1,11 @@
 import { stripe } from '@/lib/stripe';
 import { prisma } from '@/lib/prisma';
-import { buffer } from 'micro';
+// import { buffer } from 'micro';
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import Stripe from 'stripe';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+
 
 export async function POST(req: Request) {
   const headersList = headers();
@@ -46,7 +42,7 @@ export async function POST(req: Request) {
         stripeSubscriptionId: subscriptionId,
           },
         });
-        console.log("DOES THIS MEAN IT WORKED???????")
+        console.log("DOES THIS MEAN IT WORKED???????", stripeCustomerId, subscriptionStatus,subscriptionId)
       } catch (error) {
         console.error('Failed to update subscription status:', error);
         return NextResponse.json(

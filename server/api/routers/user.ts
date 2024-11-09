@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { createTRPCRouter, privateProcedure } from '../init';
+import { createTRPCRouter, baseProcedure, privateProcedure } from '../init';
 import { prisma } from '@/lib/prisma';
 import { TRPCError } from '@trpc/server';
 import { stripe } from '@/lib/stripe';
 export const userRouter = createTRPCRouter({
-    createUserIfNotExists: privateProcedure
+    createUserIfNotExists: baseProcedure
         .input(
             z.object({
                 userId: z.string(),

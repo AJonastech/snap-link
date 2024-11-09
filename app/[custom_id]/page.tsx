@@ -37,7 +37,11 @@ async function page({ params }: { params: { custom_id: string } }) {
   const headersList = headers();
   const userAgent = headersList.get('user-agent') || '';
   const deviceInfo = getDeviceInfo(userAgent);
+  if(!params.custom_id) {
+    return null
+  }
   const fetchLink = await trpc.links.fetchLinkDetail({ customId: params.custom_id });
+  if (!fetchLink.data) return null;
   const location = await getLocation()
   if (!fetchLink.data.isPasswordProtected) {
     const location = await getLocation();
