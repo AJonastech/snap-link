@@ -1,0 +1,64 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  userId       String        @unique
+  isPremium    Boolean       @default(false)
+  links        Link[]        @relation("UserLinks")
+  subscription Subscription? @relation("UserSubscription")
+  stripeCustomerId     String? @unique  
+  stripeSubscriptionId String?  
+  subscriptionStatus   String? 
+}
+
+model Link {
+  id                   String   @id @default(cuid())
+  originalUrl          String
+  customId             String?  @unique
+  shortUrl             String
+  createdAt            DateTime @default(now())
+  userId               String
+  expiryDate           DateTime?
+  isPasswordProtected  Boolean  @default(false)
+  password             String?
+  user                 User     @relation(fields: [userId], references: [userId], name: "UserLinks")
+  clickDetails         Click[]  @relation("LinkClicks")  
+  @@unique([customId, userId])
+}
+
+model Click {
+  id         String   @id @default(cuid())
+  date       DateTime @default(now())
+  location   String?
+  device     String?
+  linkId     String
+  link       Link     @relation(fields: [linkId], references: [id], name: "LinkClicks", onDelete: Cascade) // Cascade delete specified here
+}
+
+
+model Subscription {
+  id                String       @id @default(uuid())
+  userId            String       @unique
+  user              User         @relation(fields: [userId], references: [userId], name: "UserSubscription")
+  plan              SubscriptionPlan
+  startDate         DateTime     @default(now())
+  endDate           DateTime
+  isActive          Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+// Enum for subscription plans
+enum SubscriptionPlan {
+  FREE
+  PREMIUM
+}
